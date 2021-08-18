@@ -1,0 +1,97 @@
+@import url("https://fonts.googleapis.com/css2?family=Otomanopee+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+html,
+body {
+  height: 100%;
+  background-image: url("./job516-namcha-09.jpg");
+  background-position: 145% 105%;
+  width: 100%;
+}
+
+.App {
+  width: 100%;
+  margin: 0 auto;
+}
+
+html {
+  display: table;
+  margin: auto;
+}
+
+body {
+  display: table-cell;
+}
+
+#mainHeader {
+  font-family: "Otomanopee One", Helvetica, Arial, Verdana, sans-serif,
+    sans-serif;
+}
+
+#searchBox {
+  width: 60%;
+  height: 36px;
+}
+
+#hsk {
+  width: 20%;
+}
+
+#checkButton {
+  width: 20%;
+}
+
+.homeButtons {
+  background-color: #fce1a4;
+  color: #b30b0b;
+  width: 70%;
+  border-radius: 1.5rem;
+  font-size: 2rem;
+  height: 90%;
+  font-family: "Bebas Neue", cursive;
+}
+.homeButtons:hover {
+  background-color: orange;
+}
+
+.searchItems {
+  height: 70px;
+  font-size: 1.5rem;
+  background-color: #fce1a4;
+  color: #b30b0b;
+}
+.searchItems:hover {
+  background-color: orange;
+}
+
+#searchBox::placeholder {
+  color: #b30b0b;
+}
+
+a {
+  text-decoration: none;
+  font-family: "Rubik", sans-serif, Helvetica, Arial, Verdana;
+  color: #fce1a4;
+}
+a:hover {
+  color: white;
+}
+
+ul {
+  text-align: start;
+  font-size: 1.6rem;
+  list-style-type: none;
+  width: 85%;
+}
+li {
+  margin-top: 10px;
+}
+
+.otherText {
+  font-family: "Rubik", sans-serif, Helvetica, Arial, Verdana;
+}
+
+#percentGiven {
+  visibility: hidden;
+}
