@@ -17,7 +17,20 @@ const Container = styled.div `
   text-align: center;
 `
 
-const NavBar = styled.div `
+const Post = styled.div `
+  display: flex;
+  flex-direction: column;
+  background-color: #fce1a4;
+  color: #b30b0b;
+  text-align: center;
+  border: 2rem;
+  border-radius: 2rem;
+  height: 50%;
+  width: 60%;
+  margin: auto;
+`
+
+const NavBarStyled = styled.div `
   position: fixed;
   top: 0;
   color: #fce1a4;
@@ -39,4 +52,4 @@ const SearchBar = styled.div `
 `
 
 
-export {Container, SearchBar, NavBar};
+export {Container, SearchBar, NavBarStyled, Post};

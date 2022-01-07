@@ -1,14 +1,15 @@
-import './App.css';
 import React from 'react';
 import axios from 'axios';
-import {Container, SearchBar} from './Components';
+import {Container, SearchBar} from '../StyledComponents';
+
 
 class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      theUrl: "taobao.com",
+      theUrl: "",
       summaryParts: [],
+      postResponse: '',
     }
   }
 
@@ -16,20 +17,32 @@ class App extends React.Component {
     this.setState({[event.target.name]: event.target.value});
   }
 
-  callAPI = () => {
-    axios.post('http://localhost:5000/check', {
+  postReq = async() => {
+    if(this.state.theUrl.length > 0) {
+    await axios.post('http://localhost:5000/check', {
       url: this.state.theUrl
     }).then(function(response) {
-      console.log(response);
+      console.log("Success")
     }).catch(function(error) {
-      console.log(error);
-    });
-    axios.get('http://localhost:5000/check')
-    .then((getResponse) => {
-      this.setState({summaryParts: getResponse.data});
-    })
-}
+      console.log(error)});
+    }
+    else {
+      return 1;
+    }
+    return "Finished"
+  }
+  
+  getReq = async() => {
+      axios.get('http://localhost:5000/check')
+      .then((getResponse) => {
+        this.setState({summaryParts: getResponse.data, postResponse: ""})});
+  };
 
+  callApi = async() => {
+    const result = await this.postReq();
+    await this.getReq();
+  }
+  
   render() {
     const mapApi = this.state.summaryParts.map((item, i) => 
       <div key={i}>
@@ -51,11 +64,9 @@ class App extends React.Component {
           <SearchBar>
             <input placeholder="Enter a URL" type="text" id="searchBox" onChange={this.updateState} 
             style={{height: "65px"}} className="searchItems" name="theUrl" value={this.state.theUrl}></input>
-            <button id="checkButton" onClick={this.callAPI} className="searchItems" >Submit</button>
-
+            <button id="checkButton" onClick={this.callApi} className="searchItems" >API</button>
           </SearchBar>
           <label style={{marginTop: "20%"}} class="otherText">Background provided by <a href='https://www.freepik.com/vectors/floral' class="links">rawpixel.com</a></label>
-          <label>{this.state.summaryString}</label>
         </Container>
       </div>
     );

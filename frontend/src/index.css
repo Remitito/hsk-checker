@@ -95,3 +95,8 @@ li {
 #percentGiven {
   visibility: hidden;
 }
+
+.postCont {
+  line-height: 1;
+  margin: auto;
+}

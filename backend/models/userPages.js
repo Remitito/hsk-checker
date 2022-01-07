@@ -36,4 +36,4 @@ const UserPageSchema = new Schema({
     }
 })
 
-module.exports = UserPage = mongoose.model('userPage', UserPageSchema);
+module.exports = UserPage = mongoose.model('UserPage', UserPageSchema);
