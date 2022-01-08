@@ -6,5 +6,10 @@ exports.browseAllGet = function(req, res) {
         if(err) {return next(err);}
         res.send(list_pages);
     })
-} 
+}
 
+exports.browseRemove = async (req, res) => {
+    const id = req.params.id;
+    await UserPage.findByIdAndRemove(id).exec();
+    res.send('Deleted');
+};

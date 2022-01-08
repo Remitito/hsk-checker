@@ -1,12 +1,10 @@
 var fs = require('fs');
 var cheerio = require('cheerio');
 var request = require('request');
+var uuid = require('uuid');
 
-// Add a delete button for the database
-// Work out how to set the HSK levels in the database
-// Remove the old entries
-// Work out displaying all of them
-
+// Fix URL formatter
+// Refactor ! ! !
 
 const UserPage = require('../models/userPages');
 
@@ -39,7 +37,6 @@ exports.checkUrlPost = function(req, res) {
         var formattedUrl = "https://www." + userUrl;
     }
     console.log(formattedUrl);
-    fs.writeFileSync('userUrl.txt', formattedUrl);
     // Regex and function for extracting Chinese
     const REGEX_CHINESE = /[\u4e00-\u9fff]|[\u3400-\u4dbf]|[\u{20000}-\u{2a6df}]|[\u{2a700}-\u{2b73f}]|[\u{2b740}-\u{2b81f}]|[\u{2b820}-\u{2ceaf}]|[\uf900-\ufaff]|[\u3300-\u33ff]|[\ufe30-\ufe4f]|[\uf900-\ufaff]|[\u{2f800}-\u{2fa1f}]/u;
     const hasChinese = (str) => REGEX_CHINESE.test(str);
@@ -61,6 +58,7 @@ exports.checkUrlPost = function(req, res) {
             res.send("Chinese Saved!")
         }
     })
+    fs.writeFileSync('userUrl.txt', formattedUrl);
 }
 
 exports.checkUrlGet = function(req,res) {
@@ -88,7 +86,10 @@ exports.checkUrlGet = function(req,res) {
         compareToHsk(hsk, i + 1)
     }
     var urlForDb = fs.readFileSync('userUrl.txt', 'utf-8');
+    var pageId = uuid.v1().toString();
+    console.log(pageId)
     const newUserPage = new UserPage({
+        pageId: pageId,
         title: urlForDb,
         url: urlForDb,
         hsk1: hskPercentages[0],
