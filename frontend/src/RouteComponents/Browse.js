@@ -38,22 +38,14 @@ export default class Browse extends React.Component {
     }
 
     getTitle = (urlString) => {
-        // Extract website title from URL
-        let firstDot = 0;
-        let lastDot = 0; // for finding the middle of the URL
+        // Show everything before first dot as the title, e.g. [TAOBAO].com
+        let dotIndex = 0; 
         for(let i = 0; i < urlString.length; i++) {
-            if(urlString[i] === "." && firstDot === 0) {
-                firstDot = i;
-            }
-            else if(urlString[i] === "." && firstDot > 0) {
-                lastDot = i;
+            if(urlString[i] === ".") {
+                dotIndex = i;
             }
         }
-        let urlMain = "";
-        for(let e = firstDot + 1; e < lastDot; e++) {
-            urlMain += urlString[e]
-        }
-        return urlMain.charAt(0).toUpperCase() + urlMain.slice(1); // capitalize first letter
+        return urlString.charAt(0).toUpperCase() + urlString.slice(1, dotIndex); // capitalize first letter
     }
     render() {
         const mapApi = this.state.pageCollection.map((item, i) => 

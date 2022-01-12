@@ -38,3 +38,30 @@ exports.testFunc = function(url) {
         }
     })
 }
+
+
+// if(userUrl.includes("//") && userUrl.includes('www.')) {
+//     var urlAfterSlashes = "";
+//     for (let i = userUrl.indexOf("//") + 2; i < userUrl.length; i++) {
+//         urlAfterSlashes += userUrl[i];
+//     }
+//     var formattedUrl = "https://" + urlAfterSlashes;
+// }
+// else if (userUrl.includes("//") && !userUrl.includes('www.')) {
+//     var urlAfterSlashes = "";
+//     for (let i = userUrl.indexOf("//") + 2; i < userUrl.length; i++) {
+//         urlAfterSlashes += userUrl[i];
+//     }
+//     var formattedUrl = "https://www." + urlAfterSlashes;
+// }
+// else if (!userUrl.includes("//") && userUrl.includes('www.')) {
+//     var urlAfterSlashes = "";
+//     for (let i = userUrl.indexOf("//") + 1; i < userUrl.length; i++) {
+//         urlAfterSlashes += userUrl[i];
+//     }
+//     var formattedUrl = "https://" + urlAfterSlashes;
+// }
+// else {
+//     var formattedUrl = "https://www." + userUrl;
+// }
+// console.log(formattedUrl);

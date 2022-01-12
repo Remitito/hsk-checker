@@ -32,15 +32,20 @@ class App extends React.Component {
     return "Finished"
   }
   
-  getReq = async() => {
+  getReq = async(result) => {
+    if(result != 'Finished') {
+      console.log("Failed")
+    }
+    else {
       axios.get('http://localhost:5000/check')
       .then((getResponse) => {
         this.setState({summaryParts: getResponse.data, postResponse: ""})});
+    }
   };
 
   callApi = async() => {
-    const result = await this.postReq();
-    await this.getReq();
+    let result = await this.postReq();
+    await this.getReq(result);
   }
   
   render() {

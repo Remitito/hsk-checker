@@ -1,7 +1,8 @@
-var fs = require('fs');
-var cheerio = require('cheerio');
-var request = require('request');
-var uuid = require('uuid');
+const fs = require('fs');
+const cheerio = require('cheerio');
+const request = require('request');
+const uuid = require('uuid');
+const tools = require('./Tools');
 
 // Fix URL formatter
 // Refactor ! ! !
@@ -11,33 +12,10 @@ const UserPage = require('../models/userPages');
 
 exports.checkUrlPost = function(req, res) { 
     // Get the user's URL and format it for use with request module
-    var userUrl = req.body.url;
-    if(userUrl.includes("//") && userUrl.includes('www.')) {
-        var urlAfterSlashes = "";
-        for (let i = userUrl.indexOf("//") + 2; i < userUrl.length; i++) {
-            urlAfterSlashes += userUrl[i];
-        }
-        var formattedUrl = "https://" + urlAfterSlashes;
-    }
-    else if (userUrl.includes("//") && !userUrl.includes('www.')) {
-        var urlAfterSlashes = "";
-        for (let i = userUrl.indexOf("//") + 2; i < userUrl.length; i++) {
-            urlAfterSlashes += userUrl[i];
-        }
-        var formattedUrl = "https://www." + urlAfterSlashes;
-    }
-    else if (!userUrl.includes("//") && userUrl.includes('www.')) {
-        var urlAfterSlashes = "";
-        for (let i = userUrl.indexOf("//") + 1; i < userUrl.length; i++) {
-            urlAfterSlashes += userUrl[i];
-        }
-        var formattedUrl = "https://" + urlAfterSlashes;
-    }
-    else {
-        var formattedUrl = "https://www." + userUrl;
-    }
-    console.log(formattedUrl);
-    // Regex and function for extracting Chinese
+    let possibleUrls = ['https://www.', 'http://www.', 'www.']
+    let formattedUrl = possibleUrls[0] + tools.formatUrl(req.body.url);
+    console.log('formattedUrl second: ' + formattedUrl)   
+     // Regex and function for extracting Chinese
     const REGEX_CHINESE = /[\u4e00-\u9fff]|[\u3400-\u4dbf]|[\u{20000}-\u{2a6df}]|[\u{2a700}-\u{2b73f}]|[\u{2b740}-\u{2b81f}]|[\u{2b820}-\u{2ceaf}]|[\uf900-\ufaff]|[\u3300-\u33ff]|[\ufe30-\ufe4f]|[\uf900-\ufaff]|[\u{2f800}-\u{2fa1f}]/u;
     const hasChinese = (str) => REGEX_CHINESE.test(str);
 
